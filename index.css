@@ -1,0 +1,41 @@
+body {
+    background-color: aqua;
+}
+h1 {
+    font-size: 80px;
+    text-decoration: underline;
+    text-align: center;
+}
+
+table{
+    width: 100%;
+    padding-top: 200px;
+}
+th{
+    font-size:50px ;
+    padding-left:300px;
+    text-align: left;
+    padding-bottom: 20px;
+    
+}
+td {
+    font-size:40px ;
+    padding-left:300px;
+    text-align: left;
+    
+}
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    
+}
+.input-wrapper input[type="number"] {
+    margin-left: 41px; 
+}
+.input-wrapper select{
+    margin-left: 70px; 
+}
+
+.input-wrapper input[type="time"]{
+    margin-left: 90px; 
+}

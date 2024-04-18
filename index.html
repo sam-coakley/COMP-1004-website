@@ -1,11 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" type="text/css" href="index.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Set Alexa timers and alarms</title>
+    <style>
+        /* CSS for aligning input box with text */
+        .input-wrapper {
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrapper input[type="number"],
+        .input-wrapper input[type="time"],
+        .input-wrapper select {
+            margin-left: 5px; /* Add space between text and input */
+            padding: 5px; /* Add padding for better appearance */
+        }
+    </style>
 </head>
 <body>
-    <h1><center>Set Alexa timers and alarms</center></h1>
+    <h1>Set Alexa timers and alarms</h1>
+    <table>
+        <tr>
+            <th>Set Timer</th>
+            <th>Set Alarm</th>
+        </tr>
+        <tr>
+            <td>
+                <div class="input-wrapper">
+                    Minutes <input type="number" id="minutes" name="minutes">
+                </div>
+            </td>
+            <td>
+                <div class="input-wrapper">
+                    Time <input type="time" id="time" name="time">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Recurring <input type="checkbox" id="recurring1" name="recurring">
+            </td>
+            <td>
+                Recurring <input type="checkbox" id="recurring2" name="recurring">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="input-wrapper">
+                    Sound
+                    <select id="sound1" name="sound">
+                        <option value="birds">Birds</option>
+                        <option value="train">Train</option>
+                        <option value="siren">Siren</option>
+                    </select>
+                </div>
+            </td>
+            <td>
+                <div class="input-wrapper">
+                    Sound
+                    <select id="sound2" name="sound">
+                        <option value="birds">Birds</option>
+                        <option value="train">Train</option>
+                        <option value="siren">Siren</option>
+                    </select>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button onclick="savetimer()">Set Timer</button>
+            </td>
+            <td>
+                <button onclick="savealarm()">Set Alarm</button>
+            </td>
+        </tr>
+    </table>
+
+
+    <script>
+        function savetimer() {
+            // Retrieve values from the input fields
+            var minutes = document.getElementById("minutes").value;
+            var recurring = document.getElementById("recurring1").checked;
+            var sound = document.getElementById("sound1").value;
+
+            // Create a JavaScript object with the retrieved values
+            var data = {
+                "timer": {
+                    "minutes": minutes,
+                    "recurring": recurring,
+                    "sound": sound
+                }
+            };
+
+            // Convert the JavaScript object to JSON format
+            var jsonData = JSON.stringify(data);
+
+            // Create a temporary anchor element
+            var anchor = document.createElement('a');
+            anchor.setAttribute('href', 'data:text/json;charset=utf-8,' + encodeURIComponent(jsonData));
+            anchor.setAttribute('download', 'timer_data.json');
+            anchor.style.display = 'none';
+            document.body.appendChild(anchor);
+
+            // Programmatically trigger a click event on the anchor element
+            anchor.click();
+
+            // Remove the anchor element from the document
+            document.body.removeChild(anchor);
+        }
+        function savealarm() {
+            // Retrieve values from the input fields
+            var time = document.getElementById("time").value;
+            var recurring = document.getElementById("recurring1").checked;
+            var sound = document.getElementById("sound1").value;
+
+            // Create a JavaScript object with the retrieved values
+            var data = {
+                "timer": {
+                    "Time": time,
+                    "recurring": recurring,
+                    "sound": sound
+                }
+            };
+
+            // Convert the JavaScript object to JSON format
+            var jsonData = JSON.stringify(data);
+
+            // Create a temporary anchor element
+            var anchor = document.createElement('a');
+            anchor.setAttribute('href', 'data:text/json;charset=utf-8,' + encodeURIComponent(jsonData));
+            anchor.setAttribute('download', 'timer_data.json');
+            anchor.style.display = 'none';
+            document.body.appendChild(anchor);
+
+            // Programmatically trigger a click event on the anchor element
+            anchor.click();
+
+            // Remove the anchor element from the document
+            document.body.removeChild(anchor);
+        }
+    </script>
 </body>
 </html>
